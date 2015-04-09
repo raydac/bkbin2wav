@@ -3,7 +3,7 @@ It is a small utility to convert .BIN snapshots ([BK-0010(01)](http://en.wikiped
 The Project is based on [old QBasic based converter project](http://bk-mg.narod.ru/).
 
 # What is BK-0010
-[BK-0010](http://en.wikipedia.org/wiki/Electronika_BK) is the most popular soviet home computer 16 bit platform.
+[BK-0010](http://en.wikipedia.org/wiki/Electronika_BK) is the most popular soviet 16 bit home computer platform with some PDP-11 compatibility.
 
 # How to use it?
 The Script is written in [Python](https://www.python.org/downloads/) so that it is more or less crossplatform one. You should have installed [Python](https://www.python.org/downloads/) on your machine. The Utility has only command line interface, so that format of call is:
