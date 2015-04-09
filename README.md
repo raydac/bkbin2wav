@@ -28,3 +28,4 @@ bkbin2wav -i <binfile> [-a] [-o <wavfile>] [-n <name>] [-s addr] [-t]
         -s <addr>   The Start address for the TAP header (by default the start address from the BIN will be used)
         -t          Use the double frequency "turbo" mode
 ```
+Sometime .BIN files contain wrong size value in their header, in the case you can use **-f** option to enfore physical file length usage instead of the header length value.
