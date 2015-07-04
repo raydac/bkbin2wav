@@ -29,3 +29,7 @@ bkbin2wav -i <binfile> [-a] [-o <wavfile>] [-n <name>] [-s addr] [-t]
         -t          Use the double frequency "turbo" mode
 ```
 Sometime .BIN files contain wrong size value in their header, in the case you can use **-f** option to enforce usage of physical file length instead of the header length value.
+
+# Donation   
+If you like the software you can make some donation to the author   
+[![https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AHWJHJFBAWGL2)
