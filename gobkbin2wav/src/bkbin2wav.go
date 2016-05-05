@@ -12,7 +12,7 @@ import (
 )
 
 const __AUTHOR__ = "Igor Maznitsa (http://www.igormaznitsa.com)"
-const __VERSION__ = "1.0.1"
+const __VERSION__ = "1.0.2"
 const __PROJECTURI__ = "https://github.com/raydac/bkbin2wav"
 
 var flagUseFileSize bool
@@ -117,8 +117,8 @@ func main() {
 	if flagUseFileSize {
 		fmt.Printf("Detected flag to enforce physical file size (size defined inside of .BIN is %d byte(s), real size is %d byte(s))\n", binFile.Header.Length, len(binFile.Data))
 	} else {
-		if int(binFile.Header.Length) != len(binFile.Data) {
-			fmt.Printf("Warning! Detected different size defined in BIN header, use -f to use file size instead of header size (%d != %d)\n", binFile.Header.Length, int(srcFileInfo.Size())-4)
+		if int(binFile.Header.Length) != int(srcFileInfo.Size()-4) {
+			fmt.Printf("Warning! Detected different size defined in BIN header, use -f to use file size instead of header size (%d != %d)\n", binFile.Header.Length, srcFileInfo.Size()-4)
 		}
 	}
 
