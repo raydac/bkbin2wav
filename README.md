@@ -9,13 +9,17 @@ The Project is based on [old QBasic based converter project](http://bk-mg.narod.
 # What is BK-0010
 [BK-0010](http://en.wikipedia.org/wiki/Electronika_BK) is the most popular soviet 16 bit home computer platform with some PDP-11 compatibility.
 
+# How to load?
+ - [The Python script version](https://raw.githubusercontent.com/raydac/bkbin2wav/master/bkbin2wav.py)
+ - [The Windows version](https://github.com/raydac/bkbin2wav/releases/download/1.0.1/bkbin2wav-windows386.exe)
+ - [The Mac OS version](https://github.com/raydac/bkbin2wav/releases/download/1.0.1/bkbin2wav-macos386.bin)
+ - [The Linux version](https://github.com/raydac/bkbin2wav/releases/download/1.0.1/bkbin2wav-linux386.bin)
+
 # How to use it?
 The Script is written in [Python](https://www.python.org/downloads/) so that it is more or less crossplatform one. You should have installed [Python](https://www.python.org/downloads/) on your machine. The Utility has only command line interface, so that format of call is:
 ```
 python bkbin2wav.py -i <input file> [-o <output file>]
 ```
-also there are native versions for Windows,Linux and MacOS. They can be downloaded from [the latest release](https://github.com/raydac/bkbin2wav/releases). They can be used like the python script but they don't need any extra installations because written in GoLang.
-
 example for python version:
 ```
 python bkbin2wav.py -i Arkanoid.bin -o Arkanoid.wav
