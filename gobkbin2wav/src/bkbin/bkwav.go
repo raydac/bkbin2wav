@@ -105,7 +105,6 @@ func writeSndName(target *bytes.Buffer, name string) {
 		writeSndByte(target,uint8(' '))
 		writtenChars++
 	}
-	fmt.Printf("Written %d chars in name \n",writtenChars)
 }
 
 func round(f float64) int32 {
