@@ -1,0 +1,81 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <groupId>com.igormaznitsa.go</groupId>
+  <artifactId>bkbin2wav</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>mvn-golang</packaging>
+  
+  <name>BKBIN-TO-WAV</name>
+  <description>Converter of BIN files to WAV files to be loaded through TAP connector to BK-0010</description>
+
+  <properties>
+    <base.target.name>bkbin2wav</base.target.name>
+  </properties>
+
+  <build>
+    <sourceDirectory>${basedir}${file.separator}src</sourceDirectory>
+    <directory>${basedir}${file.separator}bin</directory>
+    <plugins>
+      <plugin>
+        <groupId>com.igormaznitsa</groupId>
+        <artifactId>mvn-golang-wrapper</artifactId>
+        <version>2.0.0</version>
+        <extensions>true</extensions>
+        <configuration>
+          <goVersion>1.6.2</goVersion>
+        </configuration>
+        <executions>
+          <execution>
+            <id>default-build</id>
+            <phase>none</phase>
+          </execution>
+          <execution>
+            <id>build-for-linux</id>
+            <goals>
+              <goal>build</goal>
+            </goals>
+            <configuration>
+              <targetOs>linux</targetOs>
+              <targetArch>386</targetArch>
+              <resultName>${base.target.name}-linux386.bin</resultName>
+              <packages>
+                <app>bkbin2wav.go</app>
+              </packages>
+            </configuration>
+          </execution>
+          <execution>
+            <id>build-for-windows</id>
+            <goals>
+              <goal>build</goal>
+            </goals>
+            <configuration>
+              <targetOs>windows</targetOs>
+              <targetArch>386</targetArch>
+              <resultName>${base.target.name}-windows386.exe</resultName>
+              <packages>
+                <app>bkbin2wav.go</app>
+              </packages>
+            </configuration>
+          </execution>
+          <execution>
+            <id>build-for-macos</id>
+            <goals>
+              <goal>build</goal>
+            </goals>
+            <configuration>
+              <targetOs>darwin</targetOs>
+              <targetArch>386</targetArch>
+              <resultName>${base.target.name}-macos386.bin</resultName>
+              <packages>
+                <app>bkbin2wav.go</app>
+              </packages>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
