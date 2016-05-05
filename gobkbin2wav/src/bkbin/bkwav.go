@@ -6,7 +6,6 @@ import (
 	"io"
 	"bytes"
 	"log"
-	"fmt"
 	"math"
 )
 
