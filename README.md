@@ -1,3 +1,7 @@
+[![License Apache 2.0](https://img.shields.io/badge/license-Apache%20License%202.0-green.svg)](http://www.apache.org/licenses/LICENSE-2.0)
+[![PayPal donation](https://img.shields.io/badge/donation-PayPal-red.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AHWJHJFBAWGL2)
+[![Yandex.Money donation](https://img.shields.io/badge/donation-Я.деньги-yellow.svg)](https://money.yandex.ru/embed/small.xml?account=41001158080699&quickpay=small&yamoney-payment-type=on&button-text=01&button-size=l&button-color=orange&targets=%D0%9F%D0%BE%D0%B6%D0%B5%D1%80%D1%82%D0%B2%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5+%D0%BD%D0%B0+%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%8B+%D1%81+%D0%BE%D1%82%D0%BA%D1%80%D1%8B%D1%82%D1%8B%D0%BC+%D0%B8%D1%81%D1%85%D0%BE%D0%B4%D0%BD%D1%8B%D0%BC+%D0%BA%D0%BE%D0%B4%D0%BE%D0%BC&default-sum=100&successURL=)
+
 # What is it?
 It is a small utility to convert .BIN snapshots ([BK-0010(01)](http://en.wikipedia.org/wiki/Electronika_BK) emulator format) into sound WAV files which can be played and recognized by real BK-0010 TAP reader.   
 The Project is based on [old QBasic based converter project](http://bk-mg.narod.ru/).
@@ -10,9 +14,15 @@ The Script is written in [Python](https://www.python.org/downloads/) so that it 
 ```
 python bkbin2wav.py -i <input file> [-o <output file>]
 ```
-example:
+also there are native versions for Windows,Linux and MacOS. They can be downloaded from [the latest release](https://github.com/raydac/bkbin2wav/releases). They can be used like the python script but they don't need any extra installations because written in GoLang.
+
+example for python version:
 ```
 python bkbin2wav.py -i Arkanoid.bin -o Arkanoid.wav
+```
+example for native version
+```
+bkbin2wav-windows386.exe -i Arkanoid.bin -o Arkanoid.wav
 ```
 if to start the script without parameters, then it will print allowed CLI flags
 ```
@@ -28,8 +38,4 @@ bkbin2wav -i <binfile> [-a] [-o <wavfile>] [-n <name>] [-s addr] [-t]
         -s <addr>   The Start address for the TAP header (by default the start address from the BIN will be used)
         -t          Use the double frequency "turbo" mode
 ```
-Sometime .BIN files contain wrong size value in their header, in the case you can use **-f** option to enforce usage of physical file length instead of the header length value.
-
-# Donation   
-If you like the software you can make some donation to the author   
-[![https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AHWJHJFBAWGL2)
+Sometime .BIN files may contain wrong data size value defined in their header, in the case you can use **-f** flag to enforce usage of physical file length instead of the data length defined in the BIN header.
