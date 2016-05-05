@@ -117,7 +117,7 @@ func main() {
 	if flagUseFileSize {
 		fmt.Printf("Detected flag to enforce physical file size (size defined inside of .BIN is %d byte(s), real size is %d byte(s))\n", binFile.Header.Length, len(binFile.Data))
 	} else {
-		if int(binFile.Header.Length) != len(binFile.Data)+16 {
+		if int(binFile.Header.Length) != len(binFile.Data) {
 			fmt.Printf("Warning! Detected different size defined in BIN header, use -f to use file size instead of header size (%d != %d)\n", binFile.Header.Length, int(srcFileInfo.Size())-4)
 		}
 	}
