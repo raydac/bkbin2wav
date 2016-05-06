@@ -15,6 +15,10 @@ The Project is based on [old QBasic based converter project](http://bk-mg.narod.
  - [The Mac OS version](https://github.com/raydac/bkbin2wav/releases/download/1.0.1/bkbin2wav-macos386.bin)
  - [The Linux version](https://github.com/raydac/bkbin2wav/releases/download/1.0.1/bkbin2wav-linux386.bin)
 
+# Known archives with snapshots
+- [Big archive of game snapshot](http://roman-dushkin.narod.ru/bk_games_all.html)
+- [Yet another big archive of game snapshots](http://www.bk001x.ru/index/na_bukvu_quot_a_quot/0-184)
+
 # How to use it?
 The Script is written in [Python](https://www.python.org/downloads/) so that it is more or less crossplatform one. You should have installed [Python](https://www.python.org/downloads/) on your machine. The Utility has only command line interface, so that format of call is:
 ```
