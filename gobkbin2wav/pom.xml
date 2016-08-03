@@ -21,10 +21,10 @@
       <plugin>
         <groupId>com.igormaznitsa</groupId>
         <artifactId>mvn-golang-wrapper</artifactId>
-        <version>2.0.0</version>
+        <version>2.1.0</version>
         <extensions>true</extensions>
         <configuration>
-          <goVersion>1.6.2</goVersion>
+          <goVersion>1.6.3</goVersion>
         </configuration>
         <executions>
           <execution>
@@ -32,21 +32,41 @@
             <phase>none</phase>
           </execution>
           <execution>
-            <id>build-for-linux</id>
+            <id>build-for-linux64</id>
             <goals>
               <goal>build</goal>
             </goals>
             <configuration>
+              <buildFlags>
+                <flag>-compiler</flag>
+                <flag>gccgo</flag>
+                <flag>-gccgoflags</flag>
+                <flag>-march=native -O3 -pipe -fomit-frame-pointer -fuse-ld=gold</flag>
+              </buildFlags>
               <targetOs>linux</targetOs>
-              <targetArch>386</targetArch>
-              <resultName>${base.target.name}-linux386.bin</resultName>
+              <targetArch>amd64</targetArch>
+              <resultName>${base.target.name}-linux86-x64</resultName>
               <packages>
                 <app>bkbin2wav.go</app>
               </packages>
             </configuration>
           </execution>
           <execution>
-            <id>build-for-windows</id>
+            <id>build-for-linux386</id>
+            <goals>
+              <goal>build</goal>
+            </goals>
+            <configuration>
+              <targetOs>linux</targetOs>
+              <targetArch>386</targetArch>
+              <resultName>${base.target.name}-linux86-386</resultName>
+              <packages>
+                <app>bkbin2wav.go</app>
+              </packages>
+            </configuration>
+          </execution>
+          <execution>
+            <id>build-for-windows386</id>
             <goals>
               <goal>build</goal>
             </goals>
@@ -60,14 +80,42 @@
             </configuration>
           </execution>
           <execution>
-            <id>build-for-macos</id>
+            <id>build-for-windows64</id>
+            <goals>
+              <goal>build</goal>
+            </goals>
+            <configuration>
+              <targetOs>windows</targetOs>
+              <targetArch>amd64</targetArch>
+              <resultName>${base.target.name}-windows64.exe</resultName>
+              <packages>
+                <app>bkbin2wav.go</app>
+              </packages>
+            </configuration>
+          </execution>
+          <execution>
+            <id>build-for-macos386</id>
             <goals>
               <goal>build</goal>
             </goals>
             <configuration>
               <targetOs>darwin</targetOs>
               <targetArch>386</targetArch>
-              <resultName>${base.target.name}-macos386.bin</resultName>
+              <resultName>${base.target.name}-macos386</resultName>
+              <packages>
+                <app>bkbin2wav.go</app>
+              </packages>
+            </configuration>
+          </execution>
+          <execution>
+            <id>build-for-macos64</id>
+            <goals>
+              <goal>build</goal>
+            </goals>
+            <configuration>
+              <targetOs>darwin</targetOs>
+              <targetArch>amd64</targetArch>
+              <resultName>${base.target.name}-macos64</resultName>
               <packages>
                 <app>bkbin2wav.go</app>
               </packages>
