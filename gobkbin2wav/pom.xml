@@ -45,7 +45,7 @@
               </buildFlags>
               <targetOs>linux</targetOs>
               <targetArch>amd64</targetArch>
-              <resultName>${base.target.name}-linux86-x64</resultName>
+              <resultName>${base.target.name}-linux-amd64</resultName>
               <packages>
                 <app>bkbin2wav.go</app>
               </packages>
@@ -59,7 +59,7 @@
             <configuration>
               <targetOs>linux</targetOs>
               <targetArch>386</targetArch>
-              <resultName>${base.target.name}-linux86-386</resultName>
+              <resultName>${base.target.name}-linux-386</resultName>
               <packages>
                 <app>bkbin2wav.go</app>
               </packages>
@@ -73,7 +73,7 @@
             <configuration>
               <targetOs>windows</targetOs>
               <targetArch>386</targetArch>
-              <resultName>${base.target.name}-windows386.exe</resultName>
+              <resultName>${base.target.name}-windows-386.exe</resultName>
               <packages>
                 <app>bkbin2wav.go</app>
               </packages>
@@ -87,7 +87,7 @@
             <configuration>
               <targetOs>windows</targetOs>
               <targetArch>amd64</targetArch>
-              <resultName>${base.target.name}-windows64.exe</resultName>
+              <resultName>${base.target.name}-windows-amd64.exe</resultName>
               <packages>
                 <app>bkbin2wav.go</app>
               </packages>
@@ -101,7 +101,7 @@
             <configuration>
               <targetOs>darwin</targetOs>
               <targetArch>386</targetArch>
-              <resultName>${base.target.name}-macos386</resultName>
+              <resultName>${base.target.name}-macos-386</resultName>
               <packages>
                 <app>bkbin2wav.go</app>
               </packages>
@@ -115,7 +115,7 @@
             <configuration>
               <targetOs>darwin</targetOs>
               <targetArch>amd64</targetArch>
-              <resultName>${base.target.name}-macos64</resultName>
+              <resultName>${base.target.name}-macos-amd64</resultName>
               <packages>
                 <app>bkbin2wav.go</app>
               </packages>
