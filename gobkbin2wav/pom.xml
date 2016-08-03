@@ -37,12 +37,6 @@
               <goal>build</goal>
             </goals>
             <configuration>
-              <buildFlags>
-                <flag>-compiler</flag>
-                <flag>gccgo</flag>
-                <flag>-gccgoflags</flag>
-                <flag>-march=native -O3 -pipe -fomit-frame-pointer -fuse-ld=gold</flag>
-              </buildFlags>
               <targetOs>linux</targetOs>
               <targetArch>amd64</targetArch>
               <resultName>${base.target.name}-linux-amd64</resultName>
