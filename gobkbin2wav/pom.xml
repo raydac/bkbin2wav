@@ -24,7 +24,7 @@
         <version>2.1.0</version>
         <extensions>true</extensions>
         <configuration>
-          <goVersion>1.6.3</goVersion>
+          <goVersion>1.7</goVersion>
         </configuration>
         <executions>
           <execution>
