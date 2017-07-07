@@ -1,12 +1,12 @@
 package bkbin
 
 import (
-	"encoding/binary"
-	"os"
-	"io"
 	"bytes"
+	"encoding/binary"
+	"io"
 	"log"
 	"math"
+	"os"
 )
 
 var SND_PARTS = [][]byte{
@@ -30,12 +30,12 @@ const SIGNAL_SYNCHRO = 3
 const SIGNAL_END_MARKER = 4
 
 type WavChunkHeader struct {
-	ID   [4] uint8
+	ID   [4]uint8
 	Size uint32
 }
 
 type WavFormat struct {
-	ID            [4] uint8
+	ID            [4]uint8
 	Size          uint32
 	AudioFormat   uint16
 	NumChannels   uint16
@@ -66,14 +66,14 @@ func writeObj(writer io.Writer, obj interface{}) error {
 
 func writeSndByte(target *bytes.Buffer, value uint8) {
 	for i := 0; i < 8; i++ {
-		writeSndSignal(target, int(value & 1), 1)
+		writeSndSignal(target, int(value&1), 1)
 		value = value >> 1
 	}
 }
 
 func writeSndShort(target *bytes.Buffer, value uint16) {
 	writeSndByte(target, byte(value))
-	writeSndByte(target, byte(value >> 8))
+	writeSndByte(target, byte(value>>8))
 }
 
 func writeSndArray(target *bytes.Buffer, value []uint8) {
@@ -93,15 +93,15 @@ func writeSndSignal(target *bytes.Buffer, index int, times int) {
 
 func writeSndName(target *bytes.Buffer, name string) {
 	writtenChars := 0
-	for i,c := range name {
-		if i>=16 {
+	for i, c := range name {
+		if i >= 16 {
 			break
 		}
 		writeSndByte(target, uint8(c))
-		writtenChars ++
+		writtenChars++
 	}
 	for writtenChars < 16 {
-		writeSndByte(target,uint8(' '))
+		writeSndByte(target, uint8(' '))
 		writtenChars++
 	}
 }
@@ -117,8 +117,12 @@ func round(f float64) int32 {
 }
 
 func restrictInByte(a int32) int32 {
-	if a < 0 {return 0}
-	if a > 255 {return 255}
+	if a < 0 {
+		return 0
+	}
+	if a > 255 {
+		return 255
+	}
 	return a
 }
 
@@ -126,7 +130,7 @@ func amplifySnd(data *[]byte) {
 	var minDetectedLevel = 256
 	var maxDetectedLevel = 0
 
-	for _,e := range *data {
+	for _, e := range *data {
 		var ie = int(e)
 		if ie < minDetectedLevel {
 			minDetectedLevel = ie
@@ -144,8 +148,8 @@ func amplifySnd(data *[]byte) {
 
 	var coeff = math.Min(c_max, c_min)
 
-	for i,e := range *data {
-		(*data)[i] = byte(restrictInByte(round((float64(e) - 128.0) * coeff)+128))
+	for i, e := range *data {
+		(*data)[i] = byte(restrictInByte(round((float64(e)-128.0)*coeff) + 128))
 	}
 }
 
@@ -196,7 +200,7 @@ func WriteWav(targetFileName string, name string, turbo bool, amplify bool, bin 
 	}
 	defer file.Close()
 
-	if err = writeHeader(file, uint32(36 + len(sndData))); err != nil {
+	if err = writeHeader(file, uint32(36+len(sndData))); err != nil {
 		return checksum, err
 	}
 

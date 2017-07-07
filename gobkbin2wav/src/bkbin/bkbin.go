@@ -2,9 +2,9 @@ package bkbin
 
 import (
 	"encoding/binary"
+	"errors"
 	"io"
 	"os"
-	"errors"
 )
 
 type BKBinHeader struct {
@@ -57,7 +57,7 @@ func BKBinRead(fileName string, readWholeFile bool) (BKBin, error) {
 func CalcChecksum(bkbin *BKBin) uint16 {
 	var sum uint32 = 0
 
-	for _,v := range (*bkbin).Data {
+	for _, v := range (*bkbin).Data {
 		sum = sum + uint32(v)
 		if sum > 0xFFFF {
 			sum = (sum & 0xFFFF) + 1
