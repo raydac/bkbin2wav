@@ -30,7 +30,7 @@ func header() {
         Author : %s
        Version : %s
   It is a converter of .BIN files (a snapshot format for BK-0010(01) emulators) into sound WAV files which compatible with real BK-0010 TAP reader
-  `, __PROJECTURI__, __AUTHOR__, __VERSION__)
+`, __PROJECTURI__, __AUTHOR__, __VERSION__)
 }
 
 func init() {
@@ -49,7 +49,16 @@ func init() {
 
 func assertParameters() os.FileInfo {
 	if len(fileInName) == 0 {
-		fmt.Fprintln(os.Stderr, "You must define BIN file")
+		fmt.Fprintf(os.Stdout, `
+
+Minimal examples:
+                conversion into WAV : %[1]s -i someBkFile.BIN
+  conversion into WAV with new name : %[1]s -i someBkFile.BIN -o wavFile.wav
+              conversion into TURBO : %[1]s -t -i someBkFile.BIN
+conversion into TURBO with new name : %[1]s -t -i someBkFile.BIN -o wavFile.wav
+
+`, os.Args[0])
+		flag.PrintDefaults()
 		os.Exit(1)
 	}
 
