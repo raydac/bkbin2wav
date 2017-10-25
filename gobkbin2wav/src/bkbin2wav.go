@@ -51,7 +51,8 @@ func assertParameters() os.FileInfo {
 	if len(fileInName) == 0 {
 		fmt.Fprintf(os.Stdout, `
 
-Minimal examples:
+Examples:
+
                 conversion into WAV : %[1]s -i someBkFile.BIN
   conversion into WAV with new name : %[1]s -i someBkFile.BIN -o wavFile.wav
               conversion into TURBO : %[1]s -t -i someBkFile.BIN
