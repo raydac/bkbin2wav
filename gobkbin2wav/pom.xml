@@ -23,10 +23,10 @@
       <plugin>
         <groupId>com.igormaznitsa</groupId>
         <artifactId>mvn-golang-wrapper</artifactId>
-        <version>2.2.0</version>
+        <version>2.3.3</version>
         <extensions>true</extensions>
         <configuration>
-          <goVersion>1.11.4</goVersion>
+          <goVersion>1.12.9</goVersion>
 	  <goBin>NONE</goBin>
 	</configuration>
         <executions>
