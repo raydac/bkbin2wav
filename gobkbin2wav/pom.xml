@@ -23,12 +23,12 @@
       <plugin>
         <groupId>com.igormaznitsa</groupId>
         <artifactId>mvn-golang-wrapper</artifactId>
-        <version>2.3.3</version>
+        <version>2.3.6</version>
         <extensions>true</extensions>
         <configuration>
-          <goVersion>1.12.9</goVersion>
-	  <goBin>NONE</goBin>
-	</configuration>
+          <goVersion>1.15.6</goVersion>
+          <goBin>NONE</goBin>
+        </configuration>
         <executions>
           <execution>
             <id>default-build</id>
@@ -92,22 +92,6 @@
               <targetOs>windows</targetOs>
               <targetArch>amd64</targetArch>
               <resultName>${base.target.name}-windows-amd64.exe</resultName>
-              <strip>${do.strip}</strip>
-              <packages>
-                <app>bkbin2wav.go</app>
-              </packages>
-            </configuration>
-          </execution>
-          <execution>
-            <id>build-for-macos386</id>
-            <goals>
-              <goal>build</goal>
-            </goals>
-            <configuration>
-              <strip>true</strip>
-              <targetOs>darwin</targetOs>
-              <targetArch>386</targetArch>
-              <resultName>${base.target.name}-macos-386</resultName>
               <strip>${do.strip}</strip>
               <packages>
                 <app>bkbin2wav.go</app>
