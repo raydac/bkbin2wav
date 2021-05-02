@@ -13,7 +13,7 @@ The Project is based on [old QBasic based converter project](http://bk-mg.narod.
 [BK-0010](http://en.wikipedia.org/wiki/Electronika_BK) is the most popular soviet 16 bit home computer platform with some PDP-11 compatibility.
 
 # Pre-built binaries?
-I use GoSDK to build cross-platform versions of the utility and ore-built images can be download from [the last release page](https://github.com/raydac/bkbin2wav/releases/tag/latest)._
+I use GoSDK to build cross-platform versions of the utility and ore-built images can be download from [the last release page](https://github.com/raydac/bkbin2wav/releases/latest).
 
 # Known archives with snapshots
 - [Big archive of game snapshot](http://roman-dushkin.narod.ru/bk_games_all.html)
