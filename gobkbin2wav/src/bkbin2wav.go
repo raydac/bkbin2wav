@@ -1,9 +1,9 @@
 package main
 
 import (
-	"bkbin"
 	"flag"
 	"fmt"
+	bkbin "github.com/raydac/bkbin2wav/bkbin"
 	"log"
 	"os"
 	"path"
