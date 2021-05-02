@@ -12,11 +12,8 @@ The Project is based on [old QBasic based converter project](http://bk-mg.narod.
 # What is BK-0010
 [BK-0010](http://en.wikipedia.org/wiki/Electronika_BK) is the most popular soviet 16 bit home computer platform with some PDP-11 compatibility.
 
-# How to load?
- - [The Python script version](https://raw.githubusercontent.com/raydac/bkbin2wav/master/bkbin2wav.py)
- - [The Windows version](https://github.com/raydac/bkbin2wav/releases/download/1.0.1/bkbin2wav-windows386.exe)
- - [The Mac OS version](https://github.com/raydac/bkbin2wav/releases/download/1.0.1/bkbin2wav-macos386.bin)
- - [The Linux version](https://github.com/raydac/bkbin2wav/releases/download/1.0.1/bkbin2wav-linux386.bin)
+# Pre-built binaries?
+I use GoSDK to build cross-platform versions of the utility and ore-built images can be download from [the last release page](https://github.com/raydac/bkbin2wav/releases/tag/latest)._
 
 # Known archives with snapshots
 - [Big archive of game snapshot](http://roman-dushkin.narod.ru/bk_games_all.html)
