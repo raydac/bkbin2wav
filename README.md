@@ -10,29 +10,27 @@ The Project is based on [old QBasic based converter project](http://bk-mg.narod.
 Утилита для конвертации BIN файлов (снапшотов для эмуляторов БК-0010 и БК-0010-01) в аудио WAV формат. Позволяет получать файлы с обычной скоростью загрузки и турбированные, пригодные к загрузке на БК-0010 через магнитофонный вход.
 
 # What is BK-0010
-[BK-0010](http://en.wikipedia.org/wiki/Electronika_BK) is the most popular soviet 16 bit home computer platform with some PDP-11 compatibility.
+[BK-0010](http://en.wikipedia.org/wiki/Electronika_BK) was the most popular soviet 16-bit home computer platform in 80-th and my first computer (still working).
 
 # Pre-built binaries?
-I use GoSDK to build cross-platform versions of the utility and ore-built images can be download from [the last release page](https://github.com/raydac/bkbin2wav/releases/latest).
+Pre-compiled versions of the utility can be downloaded from [the last release page](https://github.com/raydac/bkbin2wav/releases/latest).
 
 # Known archives with snapshots
 - [Big archive of game snapshot](http://roman-dushkin.narod.ru/bk_games_all.html)
 - [Yet another big archive of game snapshots](http://www.bk001x.ru/index/na_bukvu_quot_a_quot/0-184)
 
 # How to use it?
-The Script is written in [Python](https://www.python.org/downloads/) so that it is more or less crossplatform one. You should have installed [Python](https://www.python.org/downloads/) on your machine. The Utility has only command line interface, so that format of call is:
+Initially the converter was written in [Python](https://www.python.org/downloads/) but then I made GoLang version. For Python version you have to install [Python](https://www.python.org/downloads/) but pre-compiled GoLang version can be used as simple executable files without tricks.   
+The Utility is command line interface one, you can call it with listed configurations:
+example for native version
 ```
-python bkbin2wav.py -i <input file> [-o <output file>]
+bkbin2wav-windows386.exe -i Arkanoid.bin -o Arkanoid.wav
 ```
 example for python version:
 ```
 python bkbin2wav.py -i Arkanoid.bin -o Arkanoid.wav
 ```
-example for native version
-```
-bkbin2wav-windows386.exe -i Arkanoid.bin -o Arkanoid.wav
-```
-if to start the script without parameters, then it will print allowed CLI flags
+if start the application without parameters, then it will print list of allowed options
 ```
 bkbin2wav -i <binfile> [-a] [-o <wavfile>] [-n <name>] [-s addr] [-t]
 

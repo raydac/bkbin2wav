@@ -4,7 +4,7 @@
 
   <groupId>com.igormaznitsa.go</groupId>
   <artifactId>bkbin2wav</artifactId>
-  <version>1.0.3-SNAPSHOT</version>
+  <version>1.0.3</version>
   <packaging>mvn-golang</packaging>
 
   <name>BKBIN-TO-WAV</name>
