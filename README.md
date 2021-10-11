@@ -22,15 +22,16 @@ Pre-compiled versions of the utility can be downloaded from [the last release pa
 # How to use it?
 Initially the converter was written in [Python](https://www.python.org/downloads/) but then I made GoLang version. For Python version you have to install [Python](https://www.python.org/downloads/) but pre-compiled GoLang version can be used as simple executable files without tricks.   
 The Utility is command line interface one, you can call it with listed configurations:
-example for native version
+## Example for native version
 ```
 bkbin2wav-windows386.exe -i Arkanoid.bin -o Arkanoid.wav
 ```
-example for python version:
+## Example for python version
 ```
 python bkbin2wav.py -i Arkanoid.bin -o Arkanoid.wav
 ```
-if start the application without parameters, then it will print list of allowed options
+## Start without arguments
+If start the application without parameters, then it will print list of allowed options
 ```
 bkbin2wav -i <binfile> [-a] [-o <wavfile>] [-n <name>] [-s addr] [-t]
 
