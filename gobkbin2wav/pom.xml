@@ -4,7 +4,7 @@
 
   <groupId>com.igormaznitsa.go</groupId>
   <artifactId>bkbin2wav</artifactId>
-  <version>1.0.3</version>
+  <version>1.0.4-SNAPSHOT</version>
   <packaging>mvn-golang</packaging>
 
   <name>BKBIN-TO-WAV</name>
@@ -23,10 +23,10 @@
       <plugin>
         <groupId>com.igormaznitsa</groupId>
         <artifactId>mvn-golang-wrapper</artifactId>
-        <version>2.3.9</version>
+        <version>2.3.10</version>
         <extensions>true</extensions>
         <configuration>
-          <goVersion>1.17.2</goVersion>
+          <goVersion>1.21.3</goVersion>
           <goBin>NONE</goBin>
         </configuration>
         <executions>
