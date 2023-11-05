@@ -16,8 +16,8 @@ The Project is based on [old QBasic based converter project](http://bk-mg.narod.
 Pre-compiled versions of the utility can be downloaded from [the last release page](https://github.com/raydac/bkbin2wav/releases/latest).
 
 # Known archives with snapshots
-- [Big archive of game snapshot](http://roman-dushkin.narod.ru/bk_games_all.html)
-- [Yet another big archive of game snapshots](http://www.bk001x.ru/index/na_bukvu_quot_a_quot/0-184)
+- [Online archive of BK0010 bin files](https://archive.pdp-11.org.ru/BKGAMES/BIN/)
+- [Yet another archive of game snapshots (Web archive)](https://web.archive.org/web/20181019204608/http://www.bk001x.ru:80/index/na_bukvu_quot_a_quot/0-184)
 
 # How to use it?
 Initially the converter was written in [Python](https://www.python.org/downloads/) but then I made GoLang version. For Python version you have to install [Python](https://www.python.org/downloads/) but pre-compiled GoLang version can be used as simple executable files without tricks.   
