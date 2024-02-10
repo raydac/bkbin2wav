@@ -26,7 +26,7 @@
         <version>2.3.10</version>
         <extensions>true</extensions>
         <configuration>
-          <goVersion>1.21.3</goVersion>
+          <goVersion>1.22.0</goVersion>
           <goBin>NONE</goBin>
         </configuration>
         <executions>
