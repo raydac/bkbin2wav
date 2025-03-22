@@ -1,1 +1,0 @@
-module github.com/raydac/bkbin2wav/bkbin

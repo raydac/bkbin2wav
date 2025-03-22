@@ -11,8 +11,8 @@ import (
 	"strings"
 )
 
-const __AUTHOR__ = "Igor Maznitsa (http://www.igormaznitsa.com)"
-const __VERSION__ = "1.0.4"
+const __AUTHOR__ = "Igor Maznitsa (https://www.igormaznitsa.com)"
+const __VERSION__ = "1.0.5"
 const __PROJECTURI__ = "https://github.com/raydac/bkbin2wav"
 
 var flagUseFileSize bool
@@ -25,11 +25,11 @@ var addressStart int
 
 func header() {
 	fmt.Printf(`
-  BKBIN2WAV allows to convert .BIN snapshots (for BK-0010(01) emulators) into WAV format.
+  BKBIN2WAV allows the conversion of .BIN snapshots (for BK-0010(01) emulators) into WAV format.
   Project page : %s
         Author : %s
        Version : %s
-  It is a converter of .BIN files (a snapshot format for BK-0010(01) emulators) into sound WAV files which compatible with real BK-0010 TAP reader
+  It is a converter that transforms .BIN files (a snapshot format for BK-0010(01) emulators) into WAV sound files compatible with the real BK-0010 TAP reader.
 `, __PROJECTURI__, __AUTHOR__, __VERSION__)
 }
 

@@ -10,10 +10,10 @@ The Project is based on [old QBasic based converter project](http://bk-mg.narod.
 Утилита для конвертации BIN файлов (снапшотов для эмуляторов БК-0010 и БК-0010-01) в аудио WAV формат. Позволяет получать файлы с обычной скоростью загрузки и турбированные, пригодные к загрузке на БК-0010 через магнитофонный вход.
 
 # What is BK-0010
-[BK-0010](http://en.wikipedia.org/wiki/Electronika_BK) was the most popular soviet 16-bit home computer platform in 80-th and my first computer (still working).
+[The BK-0010](https://en.wikipedia.org/wiki/Electronika_BK) was the most popular Soviet 16-bit home computer platform of the 1980s and was also my first computer (which still works).
 
 # Pre-built binaries?
-Pre-compiled versions of the utility can be downloaded from [the last release page](https://github.com/raydac/bkbin2wav/releases/latest).
+Pre-compiled versions of the utility are available for download on [the latest release page](https://github.com/raydac/bkbin2wav/releases/latest).
 
 # Known archives with snapshots
 - [Archive 1](https://bk0010.my1.ru/load/igry_bk_0010_01/6)
@@ -22,8 +22,11 @@ Pre-compiled versions of the utility can be downloaded from [the last release pa
 
 
 # How to use it?
-Initially the converter was written in [Python](https://www.python.org/downloads/) but then I made GoLang version. For Python version you have to install [Python](https://www.python.org/downloads/) but pre-compiled GoLang version can be used as simple executable files without tricks.   
-The Utility is command line interface one, you can call it with listed configurations:
+
+Initially, the converter was written in [Python](https://www.python.org/downloads/), but I later developed a GoLang version. The Python version requires [Python](https://www.python.org/ to be installed, whereas the pre-compiled GoLang version can be used as a standalone executable without any additional setup.
+
+The utility has a command-line interface and can be executed with the following configurations:
+
 ## Example for native version
 ```
 bkbin2wav-windows386.exe -i Arkanoid.bin -o Arkanoid.wav
@@ -33,7 +36,7 @@ bkbin2wav-windows386.exe -i Arkanoid.bin -o Arkanoid.wav
 python bkbin2wav.py -i Arkanoid.bin -o Arkanoid.wav
 ```
 ## Start without arguments
-If start the application without parameters, then it will print list of allowed options
+If you start the application without parameters, it will display a list of available options.
 ```
 bkbin2wav -i <binfile> [-a] [-o <wavfile>] [-n <name>] [-s addr] [-t]
 
@@ -47,4 +50,4 @@ bkbin2wav -i <binfile> [-a] [-o <wavfile>] [-n <name>] [-s addr] [-t]
         -s <addr>   The Start address for the TAP header (by default the start address from the BIN will be used)
         -t          Use the double frequency "turbo" mode
 ```
-Sometime .BIN files may contain wrong data size value defined in their header, in the case you can use **-f** flag to enforce usage of physical file length instead of the data length defined in the BIN header.
+Sometimes, .BIN files may contain an incorrect data size value in their header. In such cases, you can use the __-f__ flag to enforce the use of the physical file length instead of the data length defined in the BIN header.
