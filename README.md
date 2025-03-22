@@ -23,7 +23,7 @@ Pre-compiled versions of the utility are available for download on [the latest r
 
 # How to use it?
 
-Initially, the converter was written in [Python](https://www.python.org/downloads/), but I later developed a GoLang version. The Python version requires [Python](https://www.python.org/ to be installed, whereas the pre-compiled GoLang version can be used as a standalone executable without any additional setup.
+Initially, the converter was written in [Python](https://www.python.org/downloads/), but I later developed a GoLang version. The Python version requires [Python](https://www.python.org/) to be installed, whereas the pre-compiled GoLang version can be used as a standalone executable without any additional setup.
 
 The utility has a command-line interface and can be executed with the following configurations:
 
