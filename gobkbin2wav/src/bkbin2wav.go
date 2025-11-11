@@ -12,7 +12,7 @@ import (
 )
 
 const __AUTHOR__ = "Igor Maznitsa (https://www.igormaznitsa.com)"
-const __VERSION__ = "1.0.5"
+const __VERSION__ = "1.0.6"
 const __PROJECTURI__ = "https://github.com/raydac/bkbin2wav"
 
 var flagUseFileSize bool
