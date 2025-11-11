@@ -187,20 +187,16 @@ func makeSoundData(bin *BKBin, name string, turbo bool) ([]byte, uint16) {
 	return buffer.Bytes(), checksum
 }
 
-func WriteWav(targetFileName string, name string, turbo bool, amplify bool, bin *BKBin) (uint16, error) {
-	sndData, checksum := makeSoundData(bin, name, turbo)
+func WriteWavIntoWriter(w io.Writer, name string, turbo bool, amplify bool, bin *BKBin) (uint16, error) {
+	var err error = nil
+	var checksum uint16 = 0
 
+	sndData, checksum := makeSoundData(bin, name, turbo)
 	if amplify {
 		amplifySnd(&sndData)
 	}
 
-	file, err := os.Create(targetFileName)
-	if err != nil {
-		return checksum, err
-	}
-	defer file.Close()
-
-	if err = writeHeader(file, uint32(36+len(sndData))); err != nil {
+	if err = writeHeader(w, uint32(36+len(sndData))); err != nil {
 		return checksum, err
 	}
 
@@ -223,17 +219,26 @@ func WriteWav(targetFileName string, name string, turbo bool, amplify bool, bin 
 	copy(wavData.ID[:], []uint8("data")[0:4])
 	wavData.Size = uint32(len(sndData))
 
-	if err = writeObj(file, wavFormat); err != nil {
+	if err = writeObj(w, wavFormat); err != nil {
 		return checksum, err
 	}
 
-	if err = writeObj(file, wavData); err != nil {
+	if err = writeObj(w, wavData); err != nil {
 		return checksum, err
 	}
 
-	if _, err = file.Write(sndData); err != nil {
+	if _, err = w.Write(sndData); err != nil {
 		return checksum, err
 	}
 
 	return checksum, nil
+}
+
+func WriteWav(targetFileName string, name string, turbo bool, amplify bool, bin *BKBin) (uint16, error) {
+	file, err := os.Create(targetFileName)
+	if err != nil {
+		return 0, err
+	}
+	defer file.Close()
+    return WriteWavIntoWriter(file, name, turbo, amplify, bin)
 }
