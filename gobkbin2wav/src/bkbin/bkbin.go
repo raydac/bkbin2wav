@@ -17,41 +17,46 @@ type BKBin struct {
 	Data   []uint8
 }
 
-func BKBinRead(fileName string, readWholeFile bool) (BKBin, error) {
-	var result BKBin
-
-	file, err := os.Open(fileName)
-	if err != nil {
-		return result, err
-	}
-	defer file.Close()
-
+func BKBinReadFromReader(r io.Reader, length int64, readWholeFile bool) (*BKBin, error) {
 	hdr := BKBinHeader{}
-	err = binary.Read(file, binary.LittleEndian, &hdr)
+	err := binary.Read(r, binary.LittleEndian, &hdr)
 	if err != nil {
-		return result, err
+		return nil, err
 	}
+
+	var result BKBin
 	result.Header = hdr
 
 	toRead := int(hdr.Length)
 	if readWholeFile {
-		stat, err := file.Stat()
-		if err != nil {
-			return result, err
-		}
-		toRead = int(stat.Size()) - 4
+		toRead = int(length) - 4
 	}
+
 	if toRead <= 0 {
-		return result, errors.New("Detected wrong length value, may be it is not a BIN file")
+		return nil, errors.New("Calculated wrong data length, may be it is not a BIN file")
 	}
 
 	data := make([]byte, toRead)
-	if _, err = io.ReadFull(file, data); err != nil {
-		return result, err
+	if _, err = io.ReadFull(r, data); err != nil {
+		return nil, err
 	}
 	result.Data = data
 
-	return result, nil
+	return &result, nil
+}
+
+func BKBinRead(fileName string, readWholeFile bool) (*BKBin, error) {
+	file, err := os.Open(fileName)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+    stat, err := file.Stat()
+    if err != nil {
+    	return nil, err
+    }
+    size := stat.Size()
+    return BKBinReadFromReader(file, size, readWholeFile)
 }
 
 func CalcChecksum(bkbin *BKBin) uint16 {

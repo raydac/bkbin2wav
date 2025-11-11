@@ -165,7 +165,7 @@ Start address : %d (&O%o)
 	Length : %d (&O%o)
 `, binFile.Header.Start, binFile.Header.Start, binFile.Header.Length, binFile.Header.Length)
 
-	checksum, err := bkbin.WriteWav(fileOutName, tapHeaderName, flagTurboMode, flagAmplify, &binFile)
+	checksum, err := bkbin.WriteWav(fileOutName, tapHeaderName, flagTurboMode, flagAmplify, binFile)
 	if err != nil {
 		log.Fatal(err)
 	}
