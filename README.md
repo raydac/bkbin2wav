@@ -24,7 +24,11 @@ Pre-compiled versions of the utility are available for download on [the latest r
 
 Initially, the converter was written in [Python](https://www.python.org/downloads/), but I later developed a GoLang version. The Python version requires [Python](https://www.python.org/) to be installed, whereas the pre-compiled GoLang version can be used as a standalone executable without any additional setup.
 
-The utility has a command-line interface and can be executed with the following configurations:
+The utility has a command-line interface and can be executed with in multiple modes:
+
+## Example for WASM
+
+[There is online WASM version of the convertor](https://www.igormaznitsa.com/bkbin2wav/index.html). It will be executing whole conversion just in browser without any external requests and save result files as WAV in download folder.
 
 ## Example for native version
 ```

@@ -4,7 +4,7 @@
 
     <groupId>com.igormaznitsa</groupId>
     <artifactId>bkbin2wav</artifactId>
-    <version>1.0.6-SNAPSHOT</version>
+    <version>1.0.6</version>
     <packaging>pom</packaging>
 
     <name>BKBIN-TO-WAV</name>
