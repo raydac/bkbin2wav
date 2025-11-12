@@ -91,48 +91,59 @@ func writeSndSignal(target *bytes.Buffer, index int, times int) {
 	}
 }
 
-func toBK0010(v any) (byte, bool) {
-	switch x := v.(type) {
-	case rune:
-		// Uppercase А–Я (U+0410–U+042F)
-		if x >= 'А' && x <= 'Я' {
-			return byte('A' + (x - 'А')), true
-		}
-		// Lowercase а–я (U+0430–U+044F)
-		if x >= 'а' && x <= 'я' {
-			return byte('a' + (x - 'а')), true
-		}
-		// Ё / ё special cases
-		switch x {
-		case 'Ё':
-			return '[', true
-		case 'ё':
-			return '{', true
-		}
-		// ASCII range passes through
-		if x < 128 {
-			return byte(x), true
+func StringToBK0010(s string) []byte {
+	runes := []rune(s)
+	result := make([]byte, 0, len(runes))
+
+	for _, r := range runes {
+		code := runeToBK0010(r)
+		if code != 0 {
+			result = append(result, code)
 		}
 	}
-	return 0, false
+
+	return result
 }
 
-// FileNameToBK0010 converts a UTF-8 filename (Go string) into BK0010 bytes.
-func strToBK0010(s string) []byte {
-	var result []byte
-	for _, r := range s {
-		if b, ok := toBK0010(r); ok {
-			result = append(result, b)
-		} else {
-			result = append(result, '?')
-		}
+var cyrillicMap = map[rune]uint8{
+	'ю': 192, 'а': 193, 'б': 194, 'ц': 195,
+	'д': 196, 'е': 197, 'ф': 198, 'г': 199,
+	'х': 200, 'и': 201, 'й': 202, 'к': 203,
+	'л': 204, 'м': 205, 'н': 206, 'о': 207,
+	'п': 208, 'я': 209, 'р': 210, 'с': 211,
+	'т': 212, 'у': 213, 'ж': 214, 'в': 215,
+	'ь': 216, 'ы': 217, 'з': 218, 'ш': 219,
+	'э': 220, 'щ': 221, 'ч': 222, 'ъ': 223,
+
+	'Ю': 224, 'А': 225, 'Б': 226, 'Ц': 227,
+	'Д': 228, 'Е': 229, 'Ф': 230, 'Г': 231,
+	'Х': 232, 'И': 233, 'Й': 234, 'К': 235,
+	'Л': 236, 'М': 237, 'Н': 238, 'О': 239,
+	'П': 240, 'Я': 241, 'Р': 242, 'С': 243,
+	'Т': 244, 'У': 245, 'Ж': 246, 'В': 247,
+	'Ь': 248, 'Ы': 249, 'З': 250, 'Ш': 251,
+	'Э': 252, 'Щ': 253, 'Ч': 254, 'Ъ': 255,
+
+	'ё': 197, 'Ё': 229,
+}
+
+func runeToBK0010(r rune) byte {
+	// ASCII characters (0x00-0x7F)
+	if r >= 0x00 && r <= 0x7F {
+		return byte(r)
 	}
-	return result
+
+	if code, ok := cyrillicMap[r]; ok {
+		return byte(code)
+	}
+
+	// Unmapped character - dot
+	return 46
 }
 
 func writeSndName(target *bytes.Buffer, name string) {
 	writtenChars := 0
-    nameBk0010 := strToBK0010(name)
+	nameBk0010 := StringToBK0010(name)
 	for i, c := range nameBk0010 {
 		if i >= 16 {
 			break
@@ -280,5 +291,5 @@ func WriteWav(targetFileName string, name string, turbo bool, amplify bool, bin 
 		return 0, err
 	}
 	defer file.Close()
-    return WriteWavIntoWriter(file, name, turbo, amplify, bin)
+	return WriteWavIntoWriter(file, name, turbo, amplify, bin)
 }

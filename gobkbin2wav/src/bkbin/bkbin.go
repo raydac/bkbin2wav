@@ -51,12 +51,12 @@ func BKBinRead(fileName string, readWholeFile bool) (*BKBin, error) {
 		return nil, err
 	}
 	defer file.Close()
-    stat, err := file.Stat()
-    if err != nil {
-    	return nil, err
-    }
-    size := stat.Size()
-    return BKBinReadFromReader(file, size, readWholeFile)
+	stat, err := file.Stat()
+	if err != nil {
+		return nil, err
+	}
+	size := stat.Size()
+	return BKBinReadFromReader(file, size, readWholeFile)
 }
 
 func CalcChecksum(bkbin *BKBin) uint16 {
