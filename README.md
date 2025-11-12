@@ -15,9 +15,10 @@ The Project is based on [old QBasic based converter project](http://bk-mg.narod.
 Pre-compiled versions of the utility are available for download on [the latest release page](https://github.com/raydac/bkbin2wav/releases/latest).
 
 # Known archives with snapshots
-- [Archive 1](https://bk0010.my1.ru/load/igry_bk_0010_01/6)
-- [Archive 2](https://archive.pdp-11.org.ru/BKGAMES/BIN/)
-- [Archive 3](http://bk0010.narod.ru/files/)
+- [bk0010.my1.ru](https://bk0010.my1.ru/load/igry_bk_0010_01/6)
+- [archive.pdp-11.org.ru](https://archive.pdp-11.org.ru/BKGAMES/BIN/)
+- [bk0010.narod.ru](http://bk0010.narod.ru/files/)
+- [r-games.net](https://r-games.net/)
 
 
 # How to use it?
@@ -27,7 +28,6 @@ Initially, the converter was written in [Python](https://www.python.org/download
 The utility has a command-line interface and can be executed with in multiple modes:
 
 ## Example for WASM
-
 [There is online WASM version of the convertor](https://www.igormaznitsa.com/bkbin2wav/index.html). It will be executing whole conversion just in browser without any external requests and save result files as WAV in download folder.
 
 ## Example for native version
