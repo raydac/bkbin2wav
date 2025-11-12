@@ -5,12 +5,13 @@ package main
 import (
 	"flag"
 	"fmt"
-	bkbin "github.com/raydac/bkbin2wav/bkbin"
 	"log"
 	"os"
 	"path"
 	"path/filepath"
 	"strings"
+
+	bkbin "github.com/raydac/bkbin2wav/bkbin"
 )
 
 const __AUTHOR__ = "Igor Maznitsa (https://www.igormaznitsa.com)"

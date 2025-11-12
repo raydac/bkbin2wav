@@ -33,7 +33,7 @@ func BKBinReadFromReader(r io.Reader, length int64, readWholeFile bool) (*BKBin,
 	}
 
 	if toRead <= 0 {
-		return nil, errors.New("Calculated wrong data length, may be it is not a BIN file")
+		return nil, errors.New("Calculated unexpected data length, may be not a BIN format")
 	}
 
 	data := make([]byte, toRead)

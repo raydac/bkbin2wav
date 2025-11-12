@@ -91,9 +91,49 @@ func writeSndSignal(target *bytes.Buffer, index int, times int) {
 	}
 }
 
+func toBK0010(v any) (byte, bool) {
+	switch x := v.(type) {
+	case rune:
+		// Uppercase А–Я (U+0410–U+042F)
+		if x >= 'А' && x <= 'Я' {
+			return byte('A' + (x - 'А')), true
+		}
+		// Lowercase а–я (U+0430–U+044F)
+		if x >= 'а' && x <= 'я' {
+			return byte('a' + (x - 'а')), true
+		}
+		// Ё / ё special cases
+		switch x {
+		case 'Ё':
+			return '[', true
+		case 'ё':
+			return '{', true
+		}
+		// ASCII range passes through
+		if x < 128 {
+			return byte(x), true
+		}
+	}
+	return 0, false
+}
+
+// FileNameToBK0010 converts a UTF-8 filename (Go string) into BK0010 bytes.
+func strToBK0010(s string) []byte {
+	var result []byte
+	for _, r := range s {
+		if b, ok := toBK0010(r); ok {
+			result = append(result, b)
+		} else {
+			result = append(result, '?')
+		}
+	}
+	return result
+}
+
 func writeSndName(target *bytes.Buffer, name string) {
 	writtenChars := 0
-	for i, c := range name {
+    nameBk0010 := strToBK0010(name)
+	for i, c := range nameBk0010 {
 		if i >= 16 {
 			break
 		}

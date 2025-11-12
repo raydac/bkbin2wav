@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIN to WAV Converter</title>
+
+    <meta name="description" content="Free online BK-0010 BIN emulator files to WAV converter. Easily convert your .bin files to audio WAV format for real hardware loading or emulation. Fast and accurate results!">
+    <meta name="keywords" content="БК-0010,БК-0010,БК-0010Ш,БК-0010-01,BK-0010,BK-0011,BK-0010-01,BIN to WAV, BK0010 converter, BIN file converter, BK0010 emulator, retro computing, WAV audio, BK0010 loader, convert BIN, BK games">
+    <meta name="author" content="https://www.igormaznitsa.com/">
+    <link rel="icon" href="./favicon/favicon.ico" type="image/x-icon">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        input[type="file"],
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox-group input {
+            width: auto;
+            margin-right: 8px;
+        }
+
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            display: none;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .error {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .success {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .loading {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .help-text {
+            font-size: 12px;
+            color: #777;
+            margin-top: 3px;
+        }
+
+        .wos {
+            margin-top: 1em;
+            margin-bottom: 1em;
+            text-align: center;
+        }
+
+        .wos a {
+            color: #22A3F2;
+        }
+
+        .ref {
+            margin-top: 2em;
+            text-align: center;
+        }
+
+        .ref a {
+            color: gray;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>BK-0010 BIN to WAV Converter</h1>
+        <div class="wos">
+            <a href="https://r-games.net/" target="_blank">Archive R-Games</a>
+        </div>
+
+        <div class="form-group">
+            <label for="fileInput">Select BIN File:</label>
+            <input type="file" id="fileInput" accept=".bin" onchange="updateFileName()">
+            <div class="help-text">Source file</div>
+        </div>
+
+        <div class="form-group">
+            <label for="fileName">Tape file name:</label>
+            <input type="text" id="fileName" maxlength="16" placeholder="max 16 characters">
+            <div class="help-text">File name on the tape, max 16 characters</div>
+        </div>
+
+        <div class="form-group">
+            <label for="startAddress">Start address:</label>
+            <input type="text" id="startAddress" value="">
+            <div class="help-text">Empty for default or a number between 0 and 65535 to replace</div>
+        </div>
+
+        <div class="form-group">
+            <div class="checkbox-group">
+                <input type="checkbox" id="useFileSize">
+                <label for="useFileSize" style="margin-bottom: 0;">Force override header data size by file data size</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="checkbox-group">
+                <input type="checkbox" id="amplify">
+                <label for="amplify" style="margin-bottom: 0;">Amplify</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="checkbox-group">
+                <input type="checkbox" id="turbo">
+                <label for="turbo" style="margin-bottom: 0;">Double read speed</label>
+            </div>
+        </div>
+
+        <button id="convertBtn" onclick="convertFile()" disabled>Convert</button>
+
+        <div id="result" class="result"></div>
+
+        <div class="ref">
+            <a href="https://github.com/raydac/bkbin2wav">https://github.com/raydac/bkbin2wav</a>
+        </div>
+
+    </div>
+
+    <script src="./wasm_exec.js"></script>
+
+    <script>
+        let wasmReady = false;
+
+        async function loadWasm() {
+            showResult('Loading WASM module...', 'loading');
+
+            try {
+                const go = new Go();
+                const response = await fetch('./bkbin2wav.wasm');
+                const buffer = await response.arrayBuffer();
+                const result = await WebAssembly.instantiate(buffer, go.importObject);
+
+                go.run(result.instance);
+
+                wasmReady = true;
+                showResult('WASM module loaded successfully', 'success');
+                console.log('Go WASM module loaded');
+
+                document.getElementById("convertBtn").disabled = false
+            } catch (error) {
+                console.error('Error loading WASM:', error);
+                showResult('Error loading WASM module: ' + error.message, 'error');
+            }
+        }
+
+        loadWasm();
+
+        function updateFileName() {
+            const fileInput = document.getElementById('fileInput');
+            const fileNameInput = document.getElementById('fileName');
+
+            if (fileInput.files.length > 0) {
+                const fullName = fileInput.files[0].name;
+                // Remove extension and path, keep only filename
+                const nameWithoutExt = fullName.replace(/\.[^/.]+$/, "").replace(/^.*[\\\/]/, '');
+                // Limit to 16 characters
+                const limitedName = nameWithoutExt.substring(0, 16);
+                fileNameInput.value = limitedName;
+            }
+        }
+
+        async function convertFile() {
+            const fileInput = document.getElementById('fileInput');
+            const fileName = document.getElementById('fileName').value;
+            const amplify = document.getElementById('amplify').checked;
+            const useFileSize = document.getElementById('useFileSize').checked;
+            const turbo = document.getElementById('turbo').checked;
+            const startAddressInput = document.getElementById('startAddress').value.trim().toLowerCase();
+
+            // Validate inputs
+            if (!fileInput.files.length) {
+                showResult('Please select a file first', 'error');
+                return;
+            }
+
+            if (!fileName) {
+                showResult('Please enter a file name', 'error');
+                return;
+            }
+
+            if (fileName.length > 16) {
+                showResult('File name must be 16 characters or less', 'error');
+                return;
+            }
+
+            // Validate start address
+            let startAddress;
+            if (startAddressInput.trim() === '') {
+                startAddress = -1;
+            } else {
+                const addr = parseInt(startAddressInput.trim());
+                if (isNaN(addr) || addr < 0 || addr > 65535) {
+                    showResult('Start address must be "default" or a number between 0 and 65535', 'error');
+                    return;
+                }
+                startAddress = addr;
+            }
+
+            if (!wasmReady) {
+                showResult('WASM module not loaded yet. Please wait...', 'error');
+                return;
+            }
+
+            // Check if MakeWavFromBk0010Bin function exists
+            if (typeof MakeWavFromBk0010Bin !== 'function') {
+                showResult('MakeWavFromBk0010Bin function not found in WASM module', 'error');
+                return;
+            }
+
+            try {
+                showResult('Processing...', 'loading');
+
+                // Read file as byte array
+                const file = fileInput.files[0];
+                const arrayBuffer = await file.arrayBuffer();
+                const byteArray = new Uint8Array(arrayBuffer);
+
+                // Call the Go WASM function with new parameters
+                const result = MakeWavFromBk0010Bin(byteArray, useFileSize, amplify, turbo, fileName, startAddress);
+
+                // Check for errors
+                if (result.error !== null && result.error !== undefined) {
+                    showResult('Error: ' + result.error, 'error');
+                    return;
+                }
+
+                // Check if data exists
+                if (!result.data || result.data.length === 0) {
+                    showResult('Error: No data returned from conversion', 'error');
+                    return;
+                }
+
+                // Create WAV file and download
+                const wavData = new Uint8Array(result.data);
+                const blob = new Blob([wavData], { type: 'audio/wav' });
+
+                // Generate filename: use the fileName input with .wav extension
+                const originalName = file.name;
+                const wavFileName = originalName.replace(/\.(bin|BIN)$/i, '.wav');
+
+                // Create download link
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = wavFileName;
+                document.body.appendChild(a);
+                a.click();
+
+                // Cleanup
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }, 100);
+
+                showResult('Conversion successful!\nFile saved as: ' + wavFileName + '\nSize: ' + wavData.length + ' bytes', 'success');
+            } catch (error) {
+                showResult('Error during conversion: ' + error.message, 'error');
+                console.error(error);
+            }
+        }
+
+        function showResult(message, type) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = message;
+            resultDiv.className = 'result ' + type;
+            resultDiv.style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>
